@@ -275,7 +275,6 @@ END
         TIME_DATE="PM"
     else
         TIME_DATE="AM"
-    fi
 
 }
 function acme() {
@@ -308,17 +307,7 @@ function configure_nginx() {
 
 }
 function restart_system() {
-    TEXT="
-<u>INFORMATION VPS INSTALL SC</u>
-<code>TIME    : </code><code>${TIME}</code>
-<code>IPVPS   : </code><code>${MYIP}</code>
-<code>DOMAIN  : </code><code>${domain}</code>
-<code>IP VPS  : </code><code>${MYIP}</code>
-<code>LOKASI  : </code><code>${CITY}</code>
-<code>USER    : </code><code>${NAMES}</code>
-<code>RAM     : </code><code>${RAMMS}MB</code>
-<code>LINUX   : </code><code>${OS}</code>
-"
+ 
     curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
     cp /etc/openvpn/*.ovpn /var/www/html/
     sed -i "s/xxx/${domain}/g" /var/www/html/index.html
@@ -487,16 +476,6 @@ apete_apdet() {
     ${INS} libnss3-dev libnspr4-dev pkg-config libpam0g-dev libcap-ng-dev libcap-ng-utils libselinux1-dev libcurl4-nss-dev flex bison make libnss3-tools libevent-dev bc rsyslog dos2unix zlib1g-dev libssl-dev libsqlite3-dev sed dirmngr libxml-parser-perl build-essential gcc g++ python htop lsof tar wget curl ruby zip unzip p7zip-full python3-pip haproxy libc6 util-linux build-essential msmtp-mta ca-certificates bsd-mailx iptables iptables-persistent netfilter-persistent net-tools openssl ca-certificates gnupg gnupg2 ca-certificates lsb-release gcc make cmake git screen socat xz-utils apt-transport-https gnupg1 dnsutils cron bash-completion ntpdate chrony jq  openvpn easy-rsa
 
 }
-apete_apdet
-clear
-apete_eee() {
-    ftTunneling
-    if [ -f /home/needupdate ]; then
-        red "Your script need to update first !"
-
-
-apete_eee
-clear
 LOGO
 echo -e "${RED}PASTIKAN IP VPS STATIC JANGAN DYNAMIC!!!${FONT}"
 echo -e ""
