@@ -494,7 +494,7 @@ apete_eee() {
     if [ -f /home/needupdate ]; then
         red "Your script need to update first !"
 
-}
+
 apete_eee
 clear
 LOGO
